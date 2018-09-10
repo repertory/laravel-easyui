@@ -3,11 +3,25 @@
 namespace Module\Laravel\Easyui;
 
 use Closure;
+use DateInterval;
+use DateTimeInterface;
+use Carbon\Carbon;
+use Symfony\Component\HttpFoundation\Cookie;
+use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Session\TokenMismatchException;
 
-class Middleware extends StartSession
+class Middleware
 {
+
+    protected $encrypter;
+
+    protected $except = [];
+
+    public function __construct(Encrypter $encrypter)
+    {
+        $this->encrypter = $encrypter;
+    }
 
     /**
      * @param $request
@@ -25,23 +39,14 @@ class Middleware extends StartSession
 
         Auth::shouldUse($guard);
 
-        $this->sessionHandled = true;
-
-        // If a session driver has been configured, we will need to start the session here
-        // so that the data is ready for an application. Note that the Laravel sessions
-        // do not make use of PHP "native" sessions in any way since they are crappy.
-        if ($this->sessionConfigured()) {
-            $request->setLaravelSession(
-                $session = $this->startSession($request)
-            );
-
-            $this->collectGarbage($session);
+        if (!$this->isReading($request) && !$this->inExceptArray($request) && !$this->tokensMatch($request)) {
+            throw new TokenMismatchException;
         }
 
         $current = array_get($module, 'composer.extra.laravel-easyui');
         // 登录验证(整个模块)
         if (array_get($current, 'module.auth', true) === false) {
-            return $this->next($request, $next, $session);
+            return $this->addCookieToResponse($request, $next($request));
         }
 
         if (method_exists($request->route(), 'getActionMethod')) {
@@ -54,7 +59,7 @@ class Middleware extends StartSession
         // 登录验证(当前请求)
         $auth = array_get($current, 'auth', []);
         if (array_get($auth, $alias, true) === false) {
-            return $this->next($request, $next, $session);
+            return $this->addCookieToResponse($request, $next($request));
         }
 
         if (Auth::guest()) {
@@ -63,7 +68,7 @@ class Middleware extends StartSession
 
         $acl = array_get($current, 'acl', []);
         if (array_get($acl, $alias, true) === false) {
-            return $this->next($request, $next, $session);
+            return $this->addCookieToResponse($request, $next($request));
         }
 
         // 权限验证
@@ -74,23 +79,84 @@ class Middleware extends StartSession
             return abort('403', '抱歉，你无权访问该页面！');
         }
 
-        return $this->next($request, $next, $session);
+        return $this->addCookieToResponse($request, $next($request));
     }
 
-    protected function next($request, $next, $session)
+    protected function isReading($request)
     {
-        $response = $next($request);
+        return in_array($request->method(), ['HEAD', 'GET', 'OPTIONS']);
+    }
 
-        // Again, if the session has been configured we will need to close out the session
-        // so that the attributes may be persisted to some storage medium. We will also
-        // add the session identifier cookie to the application response headers now.
-        if ($this->sessionConfigured()) {
-            $this->storeCurrentUrl($request, $session);
+    protected function inExceptArray($request)
+    {
+        foreach ($this->except as $except) {
+            if ($except !== '/') {
+                $except = trim($except, '/');
+            }
 
-            $this->addCookieToResponse($response, $session);
+            if ($request->fullUrlIs($except) || $request->is($except)) {
+                return true;
+            }
         }
 
+        return false;
+    }
+
+    protected function tokensMatch($request)
+    {
+        $token = $this->getTokenFromRequest($request);
+
+        return is_string($request->session()->token()) && is_string($token) && hash_equals($request->session()->token(), $token);
+    }
+
+    protected function getTokenFromRequest($request)
+    {
+        $token = $request->input('_token') ? : $request->header('X-CSRF-TOKEN');
+
+        if (!$token && $header = $request->header('X-XSRF-TOKEN')) {
+            $token = $this->encrypter->decrypt($header);
+        }
+
+        return $token;
+    }
+
+    protected function addCookieToResponse($request, $response)
+    {
+        $config = config('session');
+
+        $response->headers->setCookie(
+            new Cookie(
+                'XSRF-TOKEN',
+                $request->session()->token(),
+                $this->availableAt(60 * $config['lifetime']),
+                $config['path'],
+                $config['domain'],
+                $config['secure'],
+                false,
+                false,
+                $config['same_site'] ?? null
+            )
+        );
+
         return $response;
+    }
+
+    protected function availableAt($delay = 0)
+    {
+        $delay = $this->parseDateInterval($delay);
+
+        return $delay instanceof DateTimeInterface
+            ? $delay->getTimestamp()
+            : Carbon::now()->addSeconds($delay)->getTimestamp();
+    }
+
+    protected function parseDateInterval($delay)
+    {
+        if ($delay instanceof DateInterval) {
+            $delay = Carbon::now()->add($delay);
+        }
+
+        return $delay;
     }
 
 }
