@@ -11,7 +11,7 @@
                     label="密码"
                     labelWidth="48"
                     required="true"
-                    data-options="{validType: {length: [6, 32], remote: ['{{ module_url('wangdong/easyui/exist', ['type' => 'password']) }}', 'password']}}"
+                    data-options="{validType: {length: [6, 32], remote: ['{{ module_url('laravel/easyui/exist', ['type' => 'password']) }}', 'password']}}"
                     style="width: 100%">
             </dd>
             <dd>
