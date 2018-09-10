@@ -7,7 +7,7 @@
                            label="邮箱"
                            labelWidth="48"
                            required="true"
-                           data-options="{validType: {email: true, remote: ['{{ module_url('wangdong/easyui/exist', ['type' => 'email']) }}', 'email']}}"
+                           data-options="{validType: {email: true, remote: ['{{ module_url('laravel/easyui/exist', ['type' => 'email']) }}', 'email']}}"
                            style="width: 100%;">
                 </dd>
                 <dd style="margin: 16px;">
