@@ -65,7 +65,10 @@ class Init extends Command
                     return '查看';
                 });
 
-            array_set($composer, 'extra.laravel-module.middleware', ['Module\Laravel\Easyui\Middleware']);
+            array_set($composer, 'extra.laravel-module.middleware', [
+                'Illuminate\Session\Middleware\StartSession',
+                'Module\Laravel\Easyui\Middleware'
+            ]);
             array_set($composer, 'extra.laravel-easyui', [
                 'module' => [
                     'group' => array_get($module, 'group'),
