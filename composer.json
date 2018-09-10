@@ -1,0 +1,137 @@
+{
+    "name": "wangdong/laravel-easyui",
+    "description": "module for laravel-module",
+    "type": "laravel-module",
+    "authors": [{
+        "name": "wangdong",
+        "email": "mail@wangdong.io"
+    }],
+    "require": {
+        "illuminate/cookie": "~5.2",
+        "illuminate/redis": "~5.2",
+        "illuminate/session": "~5.2",
+        "wangdong/laravel-module": "~1.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Module\\Laravel\\Easyui\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel-module": {
+            "config": {
+                "name": "后台管理系统",
+                "url": {
+                    "north": "laravel/easyui/north",
+                    "west": "laravel/easyui/west",
+                    "east": "",
+                    "south": "laravel/easyui/south",
+                    "dashboard": "laravel/easyui/dashboard",
+                    "login": "laravel/easyui/sign_in",
+                    "register": "laravel/easyui/sign_up",
+                    "profile": "laravel/easyui/profile",
+                    "password": "laravel/easyui/password",
+                    "logout": "laravel/easyui/logout"
+                },
+                "title": {
+                    "north": "",
+                    "west": "导航菜单",
+                    "east": "右侧菜单",
+                    "south": "",
+                    "dashboard": "首页",
+                    "login": "用户登录",
+                    "register": "用户注册"
+                },
+                "theme": "metro",
+                "themes": {
+                    "black": "/css/laravel/easyui/theme/black.css",
+                    "bootstrap": "/css/laravel/easyui/theme/bootstrap.css",
+                    "default": "/css/laravel/easyui/theme/default.css",
+                    "gray": "/css/laravel/easyui/theme/gray.css",
+                    "material": "/css/laravel/easyui/theme/material.css",
+                    "material-teal": "/css/laravel/easyui/theme/material-teal.css",
+                    "metro": "/css/laravel/easyui/theme/metro.css",
+                    "metro-blue": "/css/laravel/easyui/theme/metro-blue.css",
+                    "metro-gray": "/css/laravel/easyui/theme/metro-gray.css",
+                    "metro-green": "/css/laravel/easyui/theme/metro-green.css",
+                    "metro-orange": "/css/laravel/easyui/theme/metro-orange.css",
+                    "metro-red": "/css/laravel/easyui/theme/metro-red.css",
+                    "ui-cupertino": "/css/laravel/easyui/theme/ui-cupertino.css",
+                    "ui-dark-hive": "/css/laravel/easyui/theme/ui-dark-hive.css",
+                    "ui-pepper-grinder": "/css/laravel/easyui/theme/ui-pepper-grinder.css",
+                    "ui-sunny": "/css/laravel/easyui/theme/ui-sunny.css"
+                },
+                "dashboard": [{
+                        "width": "50%",
+                        "panels": [{
+                            "title": "使用说明",
+                            "content": "<p>可通过配置文件<code>config/module.php</code>进行修改</p>",
+                            "collapsible": true
+                        }]
+                    },
+                    {
+                        "width": "50%",
+                        "panels": [{
+                            "title": "版本说明",
+                            "content": "<p>系统版本: 1.0.0</p>",
+                            "collapsible": true
+                        }]
+                    }
+                ],
+                "import": {
+                    "styles": [],
+                    "scripts": []
+                }
+            },
+            "middleware": ["Module\\Laravel\\Easyui\\Middleware"],
+            "module": {
+                "name": "laravel/easyui",
+                "time": "2018-09-10T09:54:39+08:00",
+                "from": {
+                    "php": "7.2.8",
+                    "framework": "lumen",
+                    "version": "Lumen (5.6.4) (Laravel Components 5.6.*)"
+                }
+            }
+        },
+        "laravel-easyui": {
+            "module": {
+                "group": "Laravel",
+                "name": "Easyui",
+                "icon": "fa fa-puzzle-piece",
+                "menu": false,
+                "auth": true,
+                "acl": false
+            },
+            "alias": {
+                "getIndex": "默认",
+                "getNorth": "默认",
+                "getWest": "默认",
+                "getSouth": "默认",
+                "getDashboard": "默认",
+                "getProfile": "默认",
+                "postProfile": "默认",
+                "getPassword": "默认",
+                "postPassword": "默认",
+                "getLogin": "系统",
+                "getSignIn": "系统",
+                "postSignIn": "系统",
+                "getRegister": "系统",
+                "getSignUp": "系统",
+                "postSignUp": "系统",
+                "getLogout": "系统",
+                "postExist": "验证"
+            },
+            "auth": {
+                "默认": true,
+                "系统": false,
+                "验证": false
+            },
+            "acl": {
+                "默认": false,
+                "系统": false,
+                "验证": false
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+//@import '~jeasyui/themes/metro/easyui.css';
+@import '~jeasyui/themes/color.css';
+@import '~jeasyui/themes/icon.css';
+@import '~jeasyui/extension/jquery-easyui-ribbon/ribbon.css';
+@import '~jeasyui/extension/jquery-easyui-ribbon/ribbon-icon.css';
+@import '~jeasyui/extension/jquery-easyui-texteditor/texteditor.css';
+@import '~jeasyui/extension/jquery-easyui-desktop/desktop.css';
+@import '~font-awesome/css/font-awesome.min.css';
+@import './layout.scss';
+@include layout();
+.fa {
+  background: none !important;
+  font-size: 14px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 auto;
+  flex-direction: row;
+}
