@@ -87,11 +87,9 @@ $app->register(LaravelModule\ServiceProvider::class);
 
 ## 开发
 
-1. 创建模块 `php artisan module:init group_name/module_name`
+1. 创建模块 `php artisan laravel.easyui:init group_name/module_name`
 
-2. 模块支持 `php artisan laravel.easyui:init group_name/module_name`
-
-3. 配置文件 `module/group_name/module_name/composer.json`
+2. 配置文件 `module/group_name/module_name/composer.json`
 
 ## 隔离
 
