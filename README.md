@@ -1,10 +1,10 @@
 # laravel-easyui
 
-[![Latest Stable Version](https://poser.pugx.org/wangdong/laravel-easyui/version)](https://packagist.org/packages/wangdong/laravel-module-easyui)
-[![Total Downloads](https://poser.pugx.org/wangdong/laravel-easyui/downloads)](https://packagist.org/packages/wangdong/laravel-module-easyui)
-[![Latest Unstable Version](https://poser.pugx.org/wangdong/laravel-easyui/v/unstable)](//packagist.org/packages/wangdong/laravel-module-easyui)
-[![License](https://poser.pugx.org/wangdong/laravel-easyui/license)](https://packagist.org/packages/wangdong/laravel-module-easyui)
-[![composer.lock available](https://poser.pugx.org/wangdong/laravel-easyui/composerlock)](https://packagist.org/packages/wangdong/laravel-module-easyui)
+[![Latest Stable Version](https://poser.pugx.org/wangdong/laravel-easyui/version)](https://packagist.org/packages/wangdong/laravel-easyui)
+[![Total Downloads](https://poser.pugx.org/wangdong/laravel-easyui/downloads)](https://packagist.org/packages/wangdong/laravel-easyui)
+[![Latest Unstable Version](https://poser.pugx.org/wangdong/laravel-easyui/v/unstable)](//packagist.org/packages/wangdong/laravel-easyui)
+[![License](https://poser.pugx.org/wangdong/laravel-easyui/license)](https://packagist.org/packages/wangdong/laravel-easyui)
+[![composer.lock available](https://poser.pugx.org/wangdong/laravel-easyui/composerlock)](https://packagist.org/packages/wangdong/laravel-easyui)
 
 laravel-module插件easyui模块
 
