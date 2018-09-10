@@ -83,7 +83,10 @@
                     "scripts": []
                 }
             },
-            "middleware": ["Module\\Laravel\\Easyui\\Middleware"],
+            "middleware": [
+                "Illuminate\\Session\\Middleware\\StartSession",
+                "Module\\Laravel\\Easyui\\Middleware"
+            ],
             "module": {
                 "name": "laravel/easyui",
                 "time": "2018-09-10T09:54:39+08:00",
