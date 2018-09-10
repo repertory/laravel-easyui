@@ -21,7 +21,7 @@
                     labelWidth="48"
                     required="true"
                     validateOnCreate="false"
-                    data-options="{validType: {email: true, remote: ['{{ module_url('wangdong/easyui/exist', ['type' => 'email','reverse' => true, 'except' => $user->email]) }}', 'email']}}"
+                    data-options="{validType: {email: true, remote: ['{{ module_url('laravel/easyui/exist', ['type' => 'email','reverse' => true, 'except' => $user->email]) }}', 'email']}}"
                     style="width:100%">
             </dd>
         </dl>
