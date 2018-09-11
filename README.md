@@ -70,9 +70,6 @@ composer require wangdong/laravel-easyui
 > 文件`bootstrap/app.php`
 
 ```
-$app->middleware([
-    Illuminate\Session\Middleware\StartSession::class
-]);
 $app->configure('auth');
 $app->configure('module');
 $app->configure('session');
