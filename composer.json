@@ -2,6 +2,7 @@
     "name": "wangdong/laravel-easyui",
     "description": "module for laravel-module",
     "type": "laravel-module",
+    "license": "MIT",
     "authors": [{
         "name": "wangdong",
         "email": "mail@wangdong.io"
