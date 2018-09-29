@@ -46,13 +46,14 @@
                         handler: function () {
                             self.login.call(self);
                         }
-                    },
+                    }@if(module_config('url.register')),
                     {
                         text: '注册',
                         handler: function () {
                             self.register.call(self);
                         }
                     }
+                    @endif
                 ],
                 onOpen: function () {
                     // 解决dialog中form没有被初始化的问题
