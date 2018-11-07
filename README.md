@@ -61,7 +61,7 @@ composer require wangdong/laravel-easyui
 
 3. 执行`php artisan module:publish` 复制模块文件
 
-4. 执行`php composer dumpautoload` 处理上一步中新增的类
+4. 执行`composer dumpautoload` 处理上一步中新增的类
 
 5. 执行`php artisan laravel.easyui:migrate` 初始化模块数据
 
