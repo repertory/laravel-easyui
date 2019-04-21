@@ -106,8 +106,8 @@ class Controller extends BaseController
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
-            'created_at' => date('c'),
-            'updated_at' => date('c'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
         return $this->postSignIn($request);
     }
