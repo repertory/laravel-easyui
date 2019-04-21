@@ -28,7 +28,7 @@ class Migrate extends Command
      */
     public function handle()
     {
-        $this->call('migrate');
+        $this->call('migrate', ['--seed' => true);
         $this->call('db:seed', ['--class' => 'EasyuiModulesTableSeeder']);
         $this->call('db:seed', ['--class' => 'EasyuiRolesTableSeeder']);
         $this->call('db:seed', ['--class' => 'EasyuiAclsTableSeeder']);
